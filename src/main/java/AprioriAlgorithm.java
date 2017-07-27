@@ -1,20 +1,14 @@
 import com.google.common.collect.Sets;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Setter
-@Getter
 public class AprioriAlgorithm {
-	private Set<Set<String>> startItems;
 
 	public Set<Set<String>> apriori(List<Set<String>> transactions, double minimumSupport) {
 		int k = 0;
-		Set<Set<String>> result = new HashSet<>();
+		Set<Set<String>> result;
 		Set<String> allItems = getAllItems(transactions);
 		Map<Set<String>, AtomicInteger> itemsetCounts;
 
@@ -50,6 +44,7 @@ public class AprioriAlgorithm {
 			nextCandidates = generateCandidates(currentFrequentItemsets);
 
 			if (nextCandidates.isEmpty()) {
+				result = currentFrequentItemsets;
 				break;
 			} else {
 				currentCandidates = nextCandidates;
